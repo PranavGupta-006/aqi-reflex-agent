@@ -1,79 +1,161 @@
-<script>
-    let locationData = {};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQI Trend Predictor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+.aqi-card { transition: all 0.5s ease; }
+.loading-spinner {
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+select::-webkit-scrollbar { width: 6px; }
+select::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+</style>
+</head>
 
-    // Fetch location data from backend when the page loads
-    window.onload = async () => {
-        try {
-            const response = await fetch('https://aqi-reflex-agent.onrender.com/locations');
-            locationData = await response.json();
-            
-            const stateSelect = document.getElementById('state-list');
-            stateSelect.innerHTML = Object.keys(locationData)
-                .map(state => `<option value="${state}">${state}</option>`)
-                .join('');
-            
-            updateCounties(); // Load counties for the first state automatically
-        } catch (err) {
-            console.error("Failed to load locations:", err);
-        }
+<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-6">
+
+<div class="max-w-md w-full bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-slate-700">
+<div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center">
+<h1 class="text-2xl font-bold">AQI Reflex Agent</h1>
+<p class="text-blue-100 text-sm mt-1">Location-Aware AI Forecasting</p>
+</div>
+
+<div class="p-8">
+<div class="space-y-4 mb-6">
+<div>
+<label class="block text-xs font-semibold text-slate-400 mb-1 uppercase">State Name</label>
+<select id="state-list" onchange="updateCounties()" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
+<option value="">Loading States...</option>
+</select>
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-400 mb-1 uppercase">County Name</label>
+<select id="county-list" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
+<option value="">Select a State first</option>
+</select>
+</div>
+</div>
+
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<label class="block text-xs font-semibold text-slate-400 mb-1 uppercase">PM2.5 (ug/m³)</label>
+<input type="number" id="pm25" placeholder="12.5" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-400 mb-1 uppercase">Temp (°F)</label>
+<input type="number" id="temp" placeholder="72" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-400 mb-1 uppercase">Humidity (%)</label>
+<input type="number" id="hum" placeholder="45" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-400 mb-1 uppercase">Wind (mph)</label>
+<input type="number" id="wind" placeholder="8" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
+</div>
+</div>
+
+<button onclick="getPrediction()" id="btn-text" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transform active:scale-95 transition-all flex items-center justify-center gap-2">
+<span>Run Forecast</span>
+</button>
+
+<div id="result-area" class="mt-8 hidden aqi-card rounded-2xl p-6 text-center text-slate-900">
+<p class="text-xs font-bold uppercase tracking-widest opacity-70">Next Year Forecast</p>
+<h2 id="aqi-val" class="text-6xl font-black my-2">--</h2>
+<p id="aqi-label" class="font-bold"></p>
+<p class="text-xs mt-2 italic opacity-60">Based on Random Forest Analysis</p>
+</div>
+</div>
+</div>
+
+<script>
+let locationData = {};
+
+window.onload = async () => {
+    try {
+        const response = await fetch('https://aqi-reflex-agent.onrender.com/locations');
+        locationData = await response.json();
+
+        const stateSelect = document.getElementById('state-list');
+        stateSelect.innerHTML = Object.keys(locationData)
+            .map(state => `<option value="${state}">${state}</option>`)
+            .join('');
+
+        updateCounties();
+    } catch (err) {
+        console.error("Failed to load locations:", err);
+    }
+};
+
+function updateCounties() {
+    const state = document.getElementById('state-list').value;
+    const countySelect = document.getElementById('county-list');
+
+    if (locationData[state]) {
+        countySelect.innerHTML = locationData[state]
+            .map(county => `<option value="${county}">${county}</option>`)
+            .join('');
+    }
+}
+
+async function getPrediction() {
+    const btn = document.getElementById('btn-text');
+    const resultArea = document.getElementById('result-area');
+
+    const payload = {
+        state: document.getElementById('state-list').value,
+        county: document.getElementById('county-list').value,
+        pm25: document.getElementById('pm25').value,
+        temp: document.getElementById('temp').value,
+        humidity: document.getElementById('hum').value,
+        wind: document.getElementById('wind').value
     };
 
-    // Update the County dropdown based on selected State
-    function updateCounties() {
-        const state = document.getElementById('state-list').value;
-        const countySelect = document.getElementById('county-list');
-        
-        if (locationData[state]) {
-            countySelect.innerHTML = locationData[state]
-                .map(county => `<option value="${county}">${county}</option>`)
-                .join('');
-        }
+    if (!payload.pm25 || !payload.temp || !payload.state || !payload.county) {
+        alert("Please fill in all location and weather data.");
+        return;
     }
 
-    async function getPrediction() {
-        const btn = document.getElementById('btn-text');
-        const resultArea = document.getElementById('result-area');
-        
-        const payload = {
-            state: document.getElementById('state-list').value,
-            county: document.getElementById('county-list').value,
-            pm25: document.getElementById('pm25').value,
-            temp: document.getElementById('temp').value,
-            humidity: document.getElementById('hum').value,
-            wind: document.getElementById('wind').value
-        };
+    btn.innerHTML = '<div class="loading-spinner"></div> Processing...';
+    btn.disabled = true;
 
-        if (!payload.pm25 || !payload.temp || !payload.state || !payload.county) {
-            alert("Please fill in all location and weather data.");
-            return;
+    try {
+        const response = await fetch('https://aqi-reflex-agent.onrender.com/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            resultArea.classList.remove('hidden');
+            resultArea.style.backgroundColor = data.category.color;
+            document.getElementById('aqi-val').innerText = data.prediction;
+            document.getElementById('aqi-label').innerText = data.category.label;
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert("Error: " + data.error);
         }
 
-        btn.innerHTML = '<div class="loading-spinner"></div> Processing...';
-        btn.disabled = true;
-
-        try {
-            const response = await fetch('https://aqi-reflex-agent.onrender.com/predict', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                resultArea.classList.remove('hidden');
-                resultArea.style.backgroundColor = data.category.color;
-                document.getElementById('aqi-val').innerText = data.prediction;
-                document.getElementById('aqi-label').innerText = data.category.label;
-                resultArea.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert("Error: " + data.error);
-            }
-        } catch (err) {
-            alert("Backend not reachable. Ensure app.py is running!");
-        } finally {
-            btn.innerHTML = '<span>Run Forecast</span>';
-            btn.disabled = false;
-        }
+    } catch (err) {
+        alert("Backend not reachable.");
+    } finally {
+        btn.innerHTML = '<span>Run Forecast</span>';
+        btn.disabled = false;
     }
+}
 </script>
+
+</body>
+</html>
