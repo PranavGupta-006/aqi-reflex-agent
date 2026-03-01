@@ -12,7 +12,6 @@ CORS(app)
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
-# --- GLOBAL OBJECTS ---
 model = None
 state_encoder = LabelEncoder()
 county_encoder = LabelEncoder()
@@ -51,17 +50,14 @@ def train_model_on_startup():
 
         df = pd.read_csv(DATA_PATH)
 
-        # Encode
         df['State_Enc'] = state_encoder.fit_transform(df['State Name'])
         df['County_Enc'] = county_encoder.fit_transform(df['County Name'])
 
-        # Sort & clean
         df = df.sort_values(by=['State Name', 'County Name', 'Year'])
         cols = ['PM2.5', 'Temperature', 'Humidity', 'Wind Speed']
         df[cols] = df.groupby(['State Name', 'County Name'])[cols].ffill()
         df = df.dropna(subset=['PM2.5'])
 
-        # Feature engineering
         df['Current_AQI'] = df['PM2.5'].apply(simple_aqi)
         df['Prev_Year_AQI'] = df.groupby(['State Name', 'County Name'])['Current_AQI'].shift(1)
         df['Prev_Year_Wind'] = df.groupby(['State Name', 'County Name'])['Wind Speed'].shift(1)
@@ -89,15 +85,14 @@ def train_model_on_startup():
         )
 
         model.fit(X, y)
-        print("✅ Model trained successfully.")
+        print("Model trained successfully.")
 
     except Exception as e:
-        print(f"❌ CRITICAL STARTUP ERROR: {e}")
+        print(f"CRITICAL STARTUP ERROR: {e}")
         model = None
 
 train_model_on_startup()
 
-# ---------------- ROUTES ---------------- #
 
 @app.route('/')
 def health():
@@ -161,7 +156,6 @@ def predict():
         return jsonify({'success': False, 'error': str(e)}), 400
 
 
-# Needed for Render
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
