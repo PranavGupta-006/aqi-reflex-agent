@@ -82,7 +82,7 @@ This Dataset has been Picked from **"Kaggle"**
 
 The AQI our Agent Predicted for Wisconsin - Milwaukee
 
-<img width="504" height="755" alt="image" src="https://github.com/user-attachments/assets/596a9375-9d47-4c13-9eef-37c25e1ed238" />
+<img width="466" height="744" alt="image" src="https://github.com/user-attachments/assets/dd8ce144-f1c8-4094-be6d-4e9778e8a4f6" />
 
 The AQI from **https://www.aqi.in/in/dashboard/united-states/wisconsin/milwaukee** at 3rd March 2026 21:31 Hours IST
 
