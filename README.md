@@ -18,5 +18,61 @@ Due to Free Tier Services our website may take about a minute to load if the ser
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-#  
+# The CSV Dataset
+
+Our agenet uses a **merged annual dataset of environmental and air quality indicators** across multiple U.S. locations. The dataset combines pollutant measurements, geographic information, and climate-related variables to support environmental analysis, pollution monitoring, and data science research.
+
+## Dataset Overview
+
+* **File:** `merged_annual_data.csv`
+* **Rows:** 15,192 records
+* **Columns:** 14 features
+* **Granularity:** Annual data per city/location
+
+Each row represents **one city's environmental metrics for a specific year**.
+
+## 🧾 Features (Columns)
+
+| Column          | Description                                  |
+| --------------- | -------------------------------------------- |
+| **State Name**  | U.S. state where the data was recorded       |
+| **County Name** | County within the state                      |
+| **City Name**   | City where measurements were taken           |
+| **Latitude**    | Geographic latitude of the location          |
+| **Longitude**   | Geographic longitude of the location         |
+| **Year**        | Year of the recorded environmental data      |
+| **CO**          | Carbon Monoxide concentration                |
+| **NO2**         | Nitrogen Dioxide concentration               |
+| **Temperature** | Average temperature for the year             |
+| **Ozone**       | Ozone concentration levels                   |
+| **PM2.5**       | Fine particulate matter (particles ≤ 2.5 µm) |
+| **Humidity**    | Average humidity levels                      |
+| **SO2**         | Sulfur Dioxide concentration                 |
+| **Wind Speed**  | Average wind speed                           |
+
+## 🔬 Potential Use Cases
+
+* Air pollution trend analysis
+* Environmental impact studies
+* Climate and weather correlation analysis
+* Geographic pollution mapping
+* Machine learning models for air quality prediction
+
+## Notice
+
+* Some values may contain **missing data (NaN)** depending on sensor availability or reporting gaps.
+* Data is aggregated **annually**, not daily or hourly.
+
+## Example Record
+
+| State   | County  | City     | Year | Ozone  | PM2.5 |
+| ------- | ------- | -------- | ---- | ------ | ----- |
+| Alabama | Baldwin | Fairhope | 2015 | 0.0408 | 8.63  |
+
+## License and Bibliography
+
+This dataset is provided for **research and educational purposes**.
+This Dataset has been Picked from **"Kaggle"**
+
+
 
