@@ -74,5 +74,27 @@ Each row represents **one city's environmental metrics for a specific year**.
 This dataset is provided for **research and educational purposes**.
 This Dataset has been Picked from **"Kaggle"**
 
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+# Precision and Error Analysis
+
+## Precision
+
+The AQI our Agent Predicted for Wisconsin - Milwaukee
+
+<img width="504" height="755" alt="image" src="https://github.com/user-attachments/assets/596a9375-9d47-4c13-9eef-37c25e1ed238" />
+
+The AQI from **https://www.aqi.in/in/dashboard/united-states/wisconsin/milwaukee** at 3rd March 2026 21:31 Hours IST
+
+<img width="1159" height="393" alt="image" src="https://github.com/user-attachments/assets/b5fda596-4606-4224-a054-857f482355af" />
+
+## Error Analysis
+
+
+
+
+
+
+
 
 
