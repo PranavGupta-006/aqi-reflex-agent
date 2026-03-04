@@ -100,7 +100,7 @@ Percentage Error using the formula
 
 Gives us about 45.88% Error for such low readings.
 
-This still gives us accurate air pollution level readings as per US-EPA 2016
+This still gives us accurate air pollution level readings as per US-EPA 2016 standards
 
 | AQI Range | Air Pollution Level                |
 |-----------|------------------------------------|
