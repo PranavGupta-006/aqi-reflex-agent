@@ -50,7 +50,7 @@ Each row represents **one city's environmental metrics for a specific year**.
 | **SO2**         | Sulfur Dioxide concentration                 |
 | **Wind Speed**  | Average wind speed                           |
 
-## 🔬 Potential Use Cases
+## Potential Use Cases
 
 * Air pollution trend analysis
 * Environmental impact studies
