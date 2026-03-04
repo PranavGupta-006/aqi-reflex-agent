@@ -98,7 +98,24 @@ Percentage Error using the formula
 
 (AQI<sub>agent</sub> - AQI<sub>Website</sub>)/AQI<sub>Website</sub>)
 
-Gives us about 45.88% Error
+Gives us about 45.88% Error for such low readings.
+
+This still gives us accurate air pollution level readings as per US-EPA 2016
+
+| AQI Range | Air Pollution Level                |
+|-----------|------------------------------------|
+| 0–50      | Good                               |
+| 51–100    | Moderate                           |
+| 101–150   | Unhealthy for Sensitive Groups     |
+| 151–200   | Unhealthy                          |
+| 201–300   | Very Unhealthy                     |
+| 300+      | Hazardous                          |
+
+
+
+
+
+
 
 
 
