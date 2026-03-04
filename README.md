@@ -94,6 +94,8 @@ Percentage Error using the formula
 
 (AQI<sub>agent</sub> - AQI<sub>Website</sub>)/AQI<sub>Website</sub>)
 
+Gives us about 45.88% Error
+
 
 
 
