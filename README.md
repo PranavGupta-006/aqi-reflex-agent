@@ -35,7 +35,7 @@ Our agenet uses a **merged annual dataset of environmental and air quality indic
 
 Each row represents **one city's environmental metrics for a specific year**.
 
-## 🧾 Features (Columns)
+## Features (Columns)
 
 | Column          | Description                                  |
 | --------------- | -------------------------------------------- |
