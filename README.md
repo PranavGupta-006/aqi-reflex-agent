@@ -96,7 +96,7 @@ The AQI from **https://www.aqi.in/in/dashboard/united-states/wisconsin/milwaukee
 
 Percentage Error using the formula
 
-(AQI<sub>agent</sub> - AQI<sub>Website</sub>)/AQI<sub>Website</sub>)
+(AQI<sub>agent</sub> - AQI<sub>Website</sub>)/AQI<sub>Website</sub>
 
 Gives us about 45.88% Error for such low readings.
 
