@@ -4,7 +4,9 @@ This is the link to our website. We have given the Python Program a User Interfa
 
 https://aqi-reflex-agent.netlify.app/
 
-Due to Free Tier Services our website may take about a minute to load if the server has put the Python Backend Framework to sleep.
+**Due to Free Tier Services our website may take about a minute to load if the server has put the Python Backend Framework to sleep.**
+**To Force Start the Server Visit this link**
+https://aqi-reflex-agent.onrender.com/
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
