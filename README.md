@@ -109,7 +109,7 @@ This still gives us accurate air pollution level readings as per US-EPA 2016 sta
 | 101–150   | Unhealthy for Sensitive Groups     |
 | 151–200   | Unhealthy                          |
 | 201–300   | Very Unhealthy                     |
-| 300+      | Hazardous                          |
+| 300+      | Hazardous (Delhi Air ;0)           |
 
 
 
