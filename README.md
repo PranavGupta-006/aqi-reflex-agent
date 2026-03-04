@@ -93,6 +93,8 @@ The AQI from **https://www.aqi.in/in/dashboard/united-states/wisconsin/milwaukee
 Percentage Error using the formula
 
 (AQI<sub>agent</sub> - AQI<sub>Website</sub>)
+---------------------------------------------
+          AQI<sub>Website</sub>)
 
 
 
