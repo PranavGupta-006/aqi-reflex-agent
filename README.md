@@ -73,10 +73,6 @@ Each row represents **one city's environmental metrics for a specific year**.
 | ------- | ------- | -------- | ---- | ------ | ----- |
 | Alabama | Baldwin | Fairhope | 2015 | 0.0408 | 8.63  |
 
-## License and Bibliography
-
-This dataset is provided for **research and educational purposes**.
-This Dataset has been Picked from **"Kaggle"**
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -111,8 +107,11 @@ This still gives us accurate air pollution level readings as per US-EPA 2016 sta
 | 201–300   | Very Unhealthy                     |
 | 300+      | Hazardous (Delhi Air ;0)           |
 
+--------------------------------------------------------------------------------------------------------------------------------------------
+## License and Bibliography
 
-
+This dataset is provided for **research and educational purposes**.
+This Dataset has been Picked from **"Kaggle"**
 
 
 
