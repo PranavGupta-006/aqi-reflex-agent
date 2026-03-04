@@ -11,10 +11,12 @@ Due to Free Tier Services our website may take about a minute to load if the ser
 #  Tech Stack
 
 1. Python3.
-2. Flask Library.
-3. Scikit learn (Random Forest Regressor) Library.
-4. Gunicorn (For Render To host Backend).
-5. Pandas Library for CSV data Handling.
+2. HTML CSS JS
+3. Netify for front-end Hosting
+4. Flask Library.
+5. Scikit learn (Random Forest Regressor) Library.
+6. Gunicorn (For Render To host Backend).
+7. Pandas Library for CSV data Handling.
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
